@@ -41,6 +41,13 @@
                 <!-- Heatmap / Zones -->
                 <section class="dashboard-panel heatmap-panel">
                     <h2>Live Venue Heatmap</h2>
+                    <!-- Camera Feed -->
+                    <div class="camera-container" style="margin-bottom: 2rem; position: relative;">
+                        <video id="crowdCamera" autoplay playsinline style="width: 100%; border-radius: 1rem; border: 1px solid var(--border-color); background: #000; min-height: 200px;"></video>
+                        <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.6); padding: 0.5rem; border-radius: 0.5rem; font-size: 0.8rem; color: #10b981; border: 1px solid #10b981; display: flex; align-items: center; gap: 0.5rem;">
+                            <span class="pulse-dot green" style="width: 6px; height: 6px;"></span> Crowd Detection Active
+                        </div>
+                    </div>
                     <div class="zone-grid" id="zoneGrid">
                         <!-- Zones injected by JS -->
                         <div class="loading-spinner"></div>
@@ -122,6 +129,22 @@
         // Initial fetch and poll every 10 seconds
         fetchStatus();
         setInterval(fetchStatus, 10000);
+
+        // Initialize Camera for Live View Heatmap
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment' } 
+                });
+                const videoEl = document.getElementById('crowdCamera');
+                videoEl.srcObject = stream;
+            } catch (err) {
+                console.error("Camera access denied or unavailable", err);
+            }
+        }
+        
+        // Start camera on load
+        window.addEventListener('load', initCamera);
     </script>
 </body>
 </html>

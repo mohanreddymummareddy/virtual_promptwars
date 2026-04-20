@@ -26,5 +26,5 @@ def get_status():
     return jsonify(venue_status)
 
 if __name__ == '__main__':
-    # Local development server
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    # Local development server (HTTPS enabled for camera access)
+    app.run(debug=True, host='0.0.0.0', port=8080, ssl_context='adhoc')
