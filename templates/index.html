@@ -78,7 +78,6 @@
         </main>
     </div>
 
-    <!-- Script to fetch and render data -->
     <script>
         async function fetchStatus() {
             try {
@@ -96,28 +95,28 @@
                 data.zones.forEach(zone => {
                     const colorClass = zone.status.toLowerCase();
                     const card = document.createElement('div');
-                    card.className = \`zone-card \${colorClass}\`;
+                    card.className = `zone-card ${colorClass}`;
                     
-                    card.innerHTML = \`
+                    card.innerHTML = `
                         <div class="zone-header">
-                            <span class="zone-id">Zone \${zone.id}</span>
+                            <span class="zone-id">Zone ${zone.id}</span>
                             <span class="status-indicator"></span>
                         </div>
-                        <h3>\${zone.name}</h3>
+                        <h3>${zone.name}</h3>
                         <div class="metrics">
                             <div class="metric">
                                 <span class="label">Wait Time</span>
-                                <span class="value">\${zone.wait_time_mins} min</span>
+                                <span class="value">${zone.wait_time_mins} min</span>
                             </div>
                             <div class="metric">
                                 <span class="label">Congestion</span>
-                                <span class="value">\${zone.congestion}%</span>
+                                <span class="value">${zone.congestion}%</span>
                             </div>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-fill \${colorClass}-bg" style="width: \${zone.congestion}%"></div>
+                            <div class="progress-fill ${colorClass}-bg" style="width: ${zone.congestion}%"></div>
                         </div>
-                    \`;
+                    `;
                     zoneGrid.appendChild(card);
                 });
                 
@@ -134,7 +133,7 @@
         async function initCamera() {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { facingMode: 'environment' } 
+                    video: true 
                 });
                 const videoEl = document.getElementById('crowdCamera');
                 videoEl.srcObject = stream;
