@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: StadiaSync Live API
+  description: Real-time API serving congestion metrics and routing for physical event experiences.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+paths:
+  /api/status:
+    get:
+      summary: Retrieve current venue status
+      description: Returns an array of venue zones and their active congestion indices, along with global announcements.
+      responses:
+        '200':
+          description: A JSON object containing zones and announcements.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  zones:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        congestion:
+                          type: integer
+                        wait_time_mins:
+                          type: integer
+                        status:
+                          type: string
+                  announcement:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      message:
+                        type: string
+                      type:
+                        type: string

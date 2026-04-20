@@ -4,3 +4,5 @@ gunicorn
 cryptography
 pyopenssl
 pytest
+flask-cors
+python-dotenv
