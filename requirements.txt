@@ -1,3 +1,6 @@
-flask
+flask==3.0.2
 waitress
 gunicorn
+cryptography
+pyopenssl
+pytest
